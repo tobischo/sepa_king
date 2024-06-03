@@ -240,6 +240,42 @@ xml_string = sct.to_xml                    # Use schema pain.001.001.03
 xml_string = sct.to_xml('pain.001.002.03') # Use schema pain.001.002.03
 ```
 
+How to create the XML for Container files
+
+```ruby
+sct = SEPA::CreditTransfer.new(
+  name: 'Schuldner GmbH',
+  bic:  'BANKDEFFXXX',
+  iban: 'DE87200500001234567890'
+)
+
+sct.add_transaction(
+  name:                   'Telekomiker AG',
+  bic:                    'PBNKDEFF370',
+  iban:                   'DE37112589611964645802',
+  amount:                 102.50,
+  currency:               'EUR',
+  instruction:            '12345',
+  reference:              'XYZ-1234/123',
+  remittance_information: 'Rechnung vom 22.08.2013',
+  requested_date:         Date.new(2024,6,5),
+)
+
+
+container = SEPA::Container.new(
+  # Depends on alignment with the bank executing the file
+  sender_id: 'ABCDEFGH',
+  # Depends on alignment with the bank executing the file
+  id_type:   'EBIC',
+)
+
+container.add_message(sct)
+container.add_message ...
+
+container.to_xml                         # Use schema container.nnn.001.GBIC4
+container.to_xml('container.nnn.001.04') # Use schema container.nnn.001.04
+```
+
 ## Validations
 
 You can rely on our internal validations, raising errors when needed, during
