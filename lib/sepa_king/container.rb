@@ -6,10 +6,15 @@ require 'digest/sha2'
 
 module SEPA
 
+  CONTAINER_NNN_001_02    = 'container.nnn.001.02'
   CONTAINER_NNN_001_GBIC4 = 'container.nnn.001.GBIC4'
   CONTAINER_NNN_001_04    = 'container.nnn.001.04'
 
   CONTAINER_TO_MESSAGE_MAPPING = {
+    CONTAINER_NNN_001_02    => {
+      SEPA::CreditTransfer => PAIN_001_001_03,
+      SEPA::DirectDebit    => PAIN_008_001_02,
+    },
     CONTAINER_NNN_001_GBIC4 => {
       SEPA::CreditTransfer => PAIN_001_001_09,
       SEPA::DirectDebit    => PAIN_008_001_08,
@@ -46,7 +51,7 @@ module SEPA
 
     class_attribute :known_schemas
 
-    self.known_schemas = [CONTAINER_NNN_001_GBIC4, CONTAINER_NNN_001_04]
+    self.known_schemas = [CONTAINER_NNN_001_GBIC4, CONTAINER_NNN_001_04, CONTAINER_NNN_001_02]
 
     def initialize(container_options = {})
       @sender_id = container_options[:sender_id]

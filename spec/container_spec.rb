@@ -231,6 +231,11 @@ RSpec.describe SEPA::Container do
           expect(container.to_xml(SEPA::CONTAINER_NNN_001_GBIC4))
             .to validate_against('container.nnn.001.GBIC4.xsd')
         end
+
+        it 'is valid against the container schema container.nnn.001.02' do
+          expect(container.to_xml(SEPA::CONTAINER_NNN_001_02))
+            .to validate_against('container.nnn.001.02.xsd')
+        end
       end
 
       context 'with direct debits' do
@@ -246,6 +251,11 @@ RSpec.describe SEPA::Container do
         it 'is valid against the container schema container.nnn.001.GBIC4' do
           expect(container.to_xml(SEPA::CONTAINER_NNN_001_GBIC4))
             .to validate_against('container.nnn.001.GBIC4.xsd')
+        end
+
+        it 'is valid against the container schema container.nnn.001.02' do
+          expect(container.to_xml(SEPA::CONTAINER_NNN_001_02))
+            .to validate_against('container.nnn.001.02.xsd')
         end
       end
     end
