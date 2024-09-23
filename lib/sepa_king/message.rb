@@ -134,6 +134,15 @@ module SEPA
     end
 
     def build_group_header(builder)
+      other_id = nil
+      if account.respond_to?(:creditor_identifier)
+        other_id = account.creditor_identifier
+      end
+
+      if account.initiating_party != nil
+        other_id = account.initiating_party
+      end
+
       builder.GrpHdr do
         builder.MsgId(message_identification)
         builder.CreDtTm(creation_date_time)
@@ -144,10 +153,10 @@ module SEPA
           builder.Id do
             builder.OrgId do
               builder.Othr do
-                builder.Id(account.creditor_identifier)
+                builder.Id(other_id)
               end
             end
-          end if account.respond_to? :creditor_identifier
+          end if other_id
         end
       end
     end
