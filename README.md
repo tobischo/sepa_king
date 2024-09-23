@@ -52,7 +52,12 @@ sdd = SEPA::DirectDebit.new(
 
   # Creditor Identifier, in German: Gläubiger-Identifikationsnummer
   # String, max. 35 chars
-  creditor_identifier: 'DE98ZZZ09999999999'
+  creditor_identifier: 'DE98ZZZ09999999999',
+
+  # Optional: Organization ID, in German: Organisationsidentifier
+  # Can be e.g. an EBICS Account ID
+  # String
+  organization_id: 'EXAMPLE1'
 )
 
 # Second: Add transactions
@@ -165,7 +170,12 @@ sct = SEPA::CreditTransfer.new(
 
   # International Bank Account Number of the debtor
   # String, max. 34 chars
-  iban: 'DE87200500001234567890'
+  iban: 'DE87200500001234567890',
+
+  # Optional: Organization ID, in German: Organisationsidentifier
+  # Can be e.g. an EBICS Account ID
+  # String
+  organization_id: 'EXAMPLE1'
 )
 
 # Second: Add transactions

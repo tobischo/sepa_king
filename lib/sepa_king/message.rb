@@ -139,8 +139,8 @@ module SEPA
         other_id = account.creditor_identifier
       end
 
-      if account.initiating_party != nil
-        other_id = account.initiating_party
+      if account.organization_id != nil
+        other_id = account.organization_id
       end
 
       builder.GrpHdr do
